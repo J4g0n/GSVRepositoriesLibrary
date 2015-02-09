@@ -16,5 +16,10 @@ public class Test {
         for (Region region: vRegion) {
             System.out.println(region.getId() + " " + region.getLibelle());
         }
+
+        Utilisateur user = new Utilisateur("DURAND", "1234", "", "", "", "", "", "");
+        System.out.println("Should be true " + user.verifier());
+        Utilisateur user2 = new Utilisateur("DURANDAL", "124", "", "", "", "", "", "");
+        System.out.println("Should be false" + user2.verifier());
     }
 }

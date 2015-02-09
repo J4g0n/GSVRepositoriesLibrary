@@ -44,6 +44,7 @@ public class Region {
         try {
             etatSQL = ParametresBD.executeUpdateSQL(requeteCreer);
         } catch (ClassNotFoundException e) {
+            etatSQL = new EtatSQL("-100", this.getClass().getName(), "Impossible de faire le requete");
             System.out.println("Impossible d'insérer dans la table " + this.getClass().getName());
         }
 
@@ -58,6 +59,7 @@ public class Region {
         try {
             etatSQL = ParametresBD.executeUpdateSQL(requeteModifier);
         } catch (ClassNotFoundException e) {
+            etatSQL = new EtatSQL("-100", this.getClass().getName(), "Impossible de faire le requete");
             System.out.println("Impossible de modifier dans la table " + this.getClass().getName());
         }
 
@@ -72,6 +74,7 @@ public class Region {
         try {
             etatSQL = ParametresBD.executeUpdateSQL(requeteSupprimer);
         } catch (ClassNotFoundException e) {
+            etatSQL = new EtatSQL("-100", this.getClass().getName(), "Impossible de faire le requete");
             System.out.println("Impossible de supprimer dans la table " + this.getClass().getName());
         }
 
@@ -106,7 +109,7 @@ public class Region {
         String requeteSelect =
                 "SELECT * FROM regions;" ;
         ResultSet result = null;
-        Vector<Region> region = new Vector<Region>();
+        Vector<Region> regions = new Vector<Region>();
         String libelleRegion;
         int idRegion;
 
@@ -115,14 +118,14 @@ public class Region {
             while (result.next()) {
                 idRegion = result.getInt("id");
                 libelleRegion = result.getString("libelle");
-                region.add(new Region(idRegion, libelleRegion));
+                regions.add(new Region(idRegion, libelleRegion));
             }
         } catch (ClassNotFoundException e) {
-            System.out.println("Impossible de supprimer dans la table Region" );
+            System.out.println("Impossible de supprimer dans la table Region");
         } catch (SQLException e) {
             System.out.println("Impossible d'effectuer le traitement sur le résultat de la requete");
         }
 
-        return region;
+        return regions;
     }
 }
